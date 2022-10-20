@@ -6,7 +6,7 @@ A place of all destination that a user been
 - Jesse
 
 ## Figma Design
-<img src="../images/screen-01.png" alt="figma design" />
+<img src="images/screen-01.png" alt="figma design" />
 <img src="images/screen-02.png" alt="figma design" />
 
 ## API and Data Sample (MapBox)
