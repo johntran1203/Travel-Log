@@ -26,7 +26,7 @@ function Destinations() {
       mapboxAccessToken={MAPBOX_TOKEN}
     >
       <Marker longitude={-117.91} latitude={33.81}>
-        <RoomIcon onClick={e=> {
+        <RoomIcon className ='text-3xl text-red-800' onClick={e=> {
             e.preventDefault()
             setShowPopup(true)
             console.log("hi")
@@ -38,7 +38,12 @@ function Destinations() {
         closeButton={true}
         closeOnClick={false}
         onClose={() => setShowPopup(false)}>
-        You are here
+        <div className="w-64 h-32 flex-auto flex-col justify-around">
+            <label className="text-sky-600 text-sm border-b-[2px] border-sky-600 my-3">Place:</label>
+            <h4 className='font-bold'>Disneyland</h4>
+            <label className="text-sky-600 text-sm border-b-[2px] border-sky-600 my-3">Information:</label>
+            <p className="text-xs break-words">Happiest place on Earth.  Everyone should visit this place at least once. Lines are long but worth it for some people.</p>
+        </div>
       </Popup>)}
     </Map>
   );
