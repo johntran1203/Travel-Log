@@ -1,54 +1,72 @@
 import * as React from "react";
-import { render } from "react-dom";
+import { useState } from "react";
 import Map, { Marker, Popup } from "react-map-gl";
-import RoomIcon from '@mui/icons-material/Room';
-
+import RoomIcon from "@mui/icons-material/Room";
 import "mapbox-gl/dist/mapbox-gl.css";
+import cities from "../data/cities.json";
+import "./Destination.css"
+
 
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoiam9obnRyYW4xMjMiLCJhIjoiY2w5ZGl1NDl0MDZydTNubXdjYjlldHNrbyJ9.LTmjQwuRkC6QHByJiE1ozw"; // Set your mapbox token here
 
 function Destinations() {
-  const [showPopup, setShowPopup] = React.useState(true);
-  console.log(showPopup);
+  const [popupInfo, setPopupInfo] = useState(null);
   const [viewState, setViewState] = React.useState({
-    latitude: 33.81,
-    longitude: -117.91,
-    zoom: 10,
+    latitude: 36.7783,
+    longitude: -119.4179,
+    zoom: 3.5,
+    bearing: 0,
+    pitch: 0
   });
 
   return (
-    <Map
+    <Map className='map'
       {...viewState}
       onMove={(evt) => setViewState(evt.viewState)}
       style={{ width: 800, height: 600 }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxAccessToken={MAPBOX_TOKEN}
     >
-      <Marker longitude={-117.91} latitude={33.81}>
-        <RoomIcon className ='text-3xl text-red-800' onClick={e=> {
-            e.preventDefault()
-            setShowPopup(true)
-            console.log("hi")
-        }}/>
-      </Marker>
-            {showPopup && (
-      <Popup longitude={-117.91} latitude={33.81}
-        anchor="bottom"
-        closeButton={true}
-        closeOnClick={false}
-        onClose={() => setShowPopup(false)}>
-        <div className="w-64 h-32 flex-auto flex-col justify-around">
-            <label className="text-sky-600 text-sm border-b-[2px] border-sky-600 my-3">Place:</label>
-            <h4 className='font-bold'>Disneyland</h4>
-            <label className="text-sky-600 text-sm border-b-[2px] border-sky-600 my-3">Information:</label>
-            <p className="text-xs break-words">Happiest place on Earth.  Everyone should visit this place at least once. Lines are long but worth it for some people.</p>
-        </div>
-      </Popup>)}
+      {cities.map((city, index) => (
+        <Marker
+          key={index}
+          longitude={city.longitude}
+          latitude={city.latitude}
+          anchor="bottom"
+          onClick={(e) => {
+            // If we let the click event propagates to the map, it will immediately close the popup
+            // with `closeOnClick: true`
+            e.originalEvent.stopPropagation();
+            setPopupInfo(city);
+          }}
+        >
+          <RoomIcon className="text-3xl text-red-800" />
+        </Marker>
+      ))}
+      {popupInfo && (
+        <Popup
+          anchor="top"
+          longitude={Number(popupInfo.longitude)}
+          latitude={Number(popupInfo.latitude)}
+          onClose={() => setPopupInfo(null)}
+        >
+          <div>
+            <div className="w-64 h-32 flex-auto flex-col justify-around">
+              <label className="text-sky-600 text-sm border-b-[2px] border-sky-600 my-3">
+                Place:
+              </label>
+              <h4 className="font-bold">{popupInfo.city}</h4>
+              <label className="text-sky-600 text-sm border-b-[2px] border-sky-600 my-3">
+                Information:
+              </label>
+              <p className="text-xs break-words">{popupInfo.population}</p>
+            </div>
+          </div>
+        </Popup>
+      )}
     </Map>
   );
 }
 
 export default Destinations;
-
-<Marker longitude={-117.91} latitude={33.81} color="blue" />;
