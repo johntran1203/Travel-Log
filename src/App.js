@@ -5,6 +5,7 @@ import Header from './components/Header';
 import About from './pages/About';
 import Destinations from './pages/Destinations';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
     <Header>
       <Routes>
+      <Route path ='/' element={<Home />} />
         <Route path ='/about' element={<About />} />
         <Route path ='/destinations' element={<Destinations />} />
       </Routes>

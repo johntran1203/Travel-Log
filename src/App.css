@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.title{
+    font-size: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dog {
+    width: 90%;
+    height: 90%;
+    padding: 20px;
+    border-radius: 10%;
+
+}
+
+h2 {
+    font-size: 40px;
+    margin-top: 25%;
+}
+.intro {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+.grid-item {
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+.destinations {
+    
+    background-color: aqua;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
+
+
+}
+
+.pic {
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+}
