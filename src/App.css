@@ -31,9 +31,12 @@ h2 {
     grid-row-start: 2;
     grid-row-end: 4;
 }
+
+.summary {
+    padding: 100px;
+    text-align: center;
+}
 .destinations {
-    
-    background-color: aqua;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-row-gap: 20px;
@@ -42,9 +45,26 @@ h2 {
 
 }
 
+.destination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+  
+}
 .pic {
     margin: 0 auto;
-    width: 50%;
-    height: 50%;
-    padding: 10px;
+    width: 70%;
+    height: 70%;
+    padding: 15px;
+}
+
+.info {
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.word {
+    font-size: 26px;
 }
